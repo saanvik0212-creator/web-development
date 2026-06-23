@@ -1,0 +1,9 @@
+h1{
+    color:purple;
+}
+.sub{
+    color: blueviolet; background-color: antiquewhite; font-size: medium;
+}
+#sub1{
+    color: aqua; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
