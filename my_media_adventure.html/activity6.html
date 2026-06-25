@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    h1{
+        font-family: 'Times New Roman', Times, serif;font-size: large;font-weight: bold;color: rgb(203, 74, 74);text-align: center;
+    }
+    ul > li{
+        color: brown;font-weight: normal;border-radius: 8px;background-color: antiquewhite;padding: 20px;
+    }
+    ul li:nth-child(3){
+        color: black;background-color: aquamarine;
+    }
+    li:hover{
+        color: blue;background-color: cadetblue;
+    }
+    p::first-letter{
+        font-size: 220%;color: coral;
+    }
+    p::after{
+        content:"Hello";
+    }
+    li::before{
+        content:"Hii";
+    }
+    a{
+        text-decoration: none;color: chocolate;
+    }
+    p :nth-first-of-type{
+        text-transform: lowercase;text-decoration: underline;color: blue;
+    }
+</style>
+<body>
+    <h1>Food Menu Card</h1>
+    <p>Enjoy your food</p>
+    <ul>
+        <li>Pasta</li>
+        <li>Pizza</li>
+        <li>Ramen "Our chef's special</li>
+        <li>Pancake</li>
+        <li>burger</li>
+    </ul>
+    <p>Our food here is made with healthy ingridients, served hot.</p>
+    <p>We also provide a customisable dish service.</p>
+    <a href="#">Order </a>
+    <a href="#">See more</a>
+</body>
+</html>

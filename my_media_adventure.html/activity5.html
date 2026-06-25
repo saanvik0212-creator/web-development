@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #div1{
+        transform:rotateX(180deg);
+    }
+    h1{
+        text-decoration: overline;
+       text-transform:uppercase;
+    }
+    h2{
+        text-decoration: line-through;
+        text-transform: none;
+    }
+    h3{
+        text-decoration: underline;
+        text-transform: capitalize;
+    }
+    h4{
+        text-decoration:none ;
+        text-transform: lowercase;
+    }
+    @keyframes demo{
+        0%{background-color: blue;
+        }
+        100%{
+            background-color: aquamarine;
+        }
+    }
+
+    
+    #text{
+        text-shadow: 3px 3px red;animation: demo;animation-duration: 4s;
+    }
+    #box{
+        box-shadow: 9px 9px 9px blueviolet;background-color: aqua;
+    }
+    
+</style>
+<body>
+    <p>we are going to use rotate</p>
+    <div id="div1">Welcome to codingal</div>
+    <h1>hii, welcome to codingal</h1>
+    <h2>Hello</h2>
+    <h3>WELCOME TO CODINGAL</h3>
+    <h4>WELCOME TO CODINGAL</h4>
+    <div id="text">We can add text shadow using text shadow</div>
+    <div id="box">we can add box shadow too</div>
+    
+</body>
+</html>
