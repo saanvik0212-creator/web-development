@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Ice Cream Shop Menu</title>
+  <style>
+    body {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      background-color: #cff2ed;
+      text-align: center;
+      color: #431d1d;
+    }
+    h1 {
+      color: #913a81;
+      font-size: 36px;
+    }
+    h1 + p {
+      color: #5f64f6;
+      font-weight: bold;
+      background-color: #f0c9dd;
+      border-radius: 10px;
+    }
+    .shop-description::first-letter {
+      font-size: 36px;
+      color: #f34ba7;
+      font-weight: bold;
+    }
+    .menu-box {
+      width: 420px;
+      background-color: white;
+      border: 3px solid #c869ff;
+      border-radius: 15px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    ul {
+      padding: 0;
+    }
+    ul > li {
+      list-style: none;
+      background-color: #f0f9ff;
+      color: #5c2a4a;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid #ffb6c1;
+    }
+    ul > li:nth-child(3) {
+      background-color: #f0ede2;
+      color: #4e1210;
+      border: 3px solid #efd096;
+    }
+    ul > li:hover {
+      background-color: #fb7988;
+      color: white;
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+    button {
+      background-color: #cc2e7d;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #bb7cf7;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Ice Cream Shop Menu</h1>
+  <p>Pure Happiness in Every Bite!</p>
+  <p class="shop-description">
+    We serve scoops of ice creams in different delicious flavors made sugar free, color free and customers can choose their own toppings.
+  </p>
+  <div class="menu-box">
+    <h2>Today's Special Ice Cream Flavours</h2>
+    <ul>
+      <li>Chocolate Hazeelnut</li>
+      <li>Mint Chocolate Chip</li>
+      <li>Dubai Pistachio kunafa - Today's Special</li>
+      <li>Cookies and Cream</li>
+      <li>French Vanilla</li>
+    </ul>
+    <button>Order Now</button>
+  </div>
+</body>
+</html>
