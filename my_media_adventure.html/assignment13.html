@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My Jungle Explorer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+  <style>
+    body { position: relative; }
+    .jungle-slide {
+      height: 200px;
+      text-align: center;
+      padding-top: 75px;
+      font-size: 1.8rem;
+      color: rgb(235, 192, 192);
+    }
+    .slide-rainforest { background-image: linear-gradient(to right, rgb(102, 232, 102), rgb(1, 108, 1))}
+    .slide-river { background-image: linear-gradient(to right, rgb(82, 140, 234), rgb(55, 55, 242));}
+    .slide-night { background-image: linear-gradient(to right,Blue, purple)}
+
+
+    .section {
+      padding: 70px 20px;
+      min-height: 300px;
+    }
+
+
+    #rainforest { background: rgb(181, 231, 192); }
+    #river { background: rgb(184, 213, 232); }
+    #wildlife { background: rgb(249, 212, 224); }
+  </style>
+</head>
+
+
+<body data-spy="scroll" data-target="#jungleNav" data-offset="60">
+
+  <div id="jungleCarousel" class="carousel slide" data-ride="carousel">
+
+
+    <ol class="carousel-indicators">
+      <li data-target="#jungleCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#jungleCarousel" data-slide-to="1"></li>
+      <li data-target="#jungleCarousel" data-slide-to="2"></li>
+    </ol>
+
+
+    <div class="carousel-inner">
+      <div class="carousel-item active jungle-slide slide-rainforest">
+        🌴Lush Rainforests
+      </div>
+
+
+      <div class="carousel-item jungle-slide slide-river">
+       🌊Hidden Waterways
+      </div>
+
+
+      <div class="carousel-item jungle-slide slide-night">
+       🪸Exotic Wildlife
+      </div>
+    </div>
+
+
+    <a class="carousel-control-prev" href="#jungleCarousel" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+
+
+    <a class="carousel-control-next" href="#jungleCarousel" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+
+
+  </div>
+
+
+  <!-- TOPIC 4: SCROLLSPY -->
+  <nav id="jungleNav" class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+    <span class="navbar-brand"></span>
+
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#rainforest">Rainforest</a>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="#river">River</a>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="#wildlife">Wildlife</a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <div class="container">
+
+
+    <div id="rainforest" class="section">
+      <h2>🌴Lush Rainforests</h2>
+      <p>Explore the jungle's lush rainforest and discover towering tree canopies, vibrant wildlife, hidden riverways.</p>
+    </div>
+
+
+    <div id="river" class="section">
+      <h2>🌊Hidden Waterways</h2>
+      <p>Explore the jungle's river and flooded ravines, secluded waterfalls etc.</p>
+    </div>
+
+
+    <div id="wildlife" class="section">
+      <h2>🪸Exotic Wildlife</h2>
+      <p>Explore exotic jungle wilflife includes observing unique canopy primates and discovering rare endemic species across lush, dense habitats.</p>
+    </div>
+
+
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
