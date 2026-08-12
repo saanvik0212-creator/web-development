@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>String Methods</h2>
+    <p>Methods</p>
+    <script>
+        var str="FaNtAsTiC"
+        document.write(str.toUpperCase())
+        document.write("<br>")
+        document.write(str.toLowerCase())
+        document.write("<br>")
+        document.write(str.startsWith('t'))
+        document.write("<br>")
+
+        var str1="we are learning string methods."
+        var patt=new RegExp("learning");
+        var res=patt.test(str1);
+        document.write(res);
+
+       
+    </script>
+    <p id="demo"></p>
+    <script>
+         for(let i=1;i<=100;i++){
+            document.write(i)
+            document.write("<br>")
+
+         }
+         document.getElementById(demo).innerHTML=letter;
+       
+    </script>
+    <p id="demo1"></p>
+    <script>
+        var Day;
+        switch(new Date().getDate()){
+        case 0:
+        Day = "Sunday";
+        break;
+        case 1:
+        Day = "Monday";
+        break;
+        case 2:
+        Day = "Tuesday";
+        break;
+        case 3:
+        Day = "Wednesday";
+        break;
+        case 4:
+        Day = "Thursday";
+        break;
+        case 5:
+        Day= "Friday";
+        break;
+        case 6:
+        Day = "Saturday";
+        break;
+
+      
+    
+    }
+
+   document.getElementById("demo1").innerHTML="Today is" +Day
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian — Learn Smarter, Not Harder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0b0f1f;
+    --navy-900:#12172b;
+    --navy-800:#1a2140;
+    --navy-700:#242c52;
+    --paper:#f3efe4;
+    --paper-dim:#c9c4b4;
+    --gold:#e8a33d;
+    --gold-soft:#f0c47c;
+    --teal:#3fb8af;
+    --coral:#e2664f;
+    --line:rgba(243,239,228,0.12);
+    --shadow:0 20px 60px rgba(0,0,0,0.45);
+    --radius:18px;
+    --ff-display:'Fraunces', serif;
+    --ff-body:'Sora', sans-serif;
+    --ff-mono:'IBM Plex Mono', monospace;
+  }
+  html[data-theme="light"]{
+    --navy-950:#f6f3ea;
+    --navy-900:#fbf9f2;
+    --navy-800:#ffffff;
+    --navy-700:#eee9d9;
+    --paper:#1a2140;
+    --paper-dim:#5c5a4d;
+    --line:rgba(26,33,64,0.12);
+    --shadow:0 20px 50px rgba(60,50,20,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy-950);
+    color:var(--paper);
+    font-family:var(--ff-body);
+    line-height:1.55;
+    transition:background .4s ease, color .4s ease;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  a{color:inherit;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  ::selection{background:var(--gold); color:var(--navy-950);}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:60;
+    background:color-mix(in srgb, var(--navy-950) 88%, transparent);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px; max-width:1180px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--ff-display); font-weight:600; font-size:1.28rem; letter-spacing:0.01em;}
+  .brand-mark{width:30px; height:30px; flex-shrink:0;}
+  .nav-links{display:flex; gap:28px; list-style:none; font-size:0.92rem; font-weight:500;}
+  .nav-links a{opacity:0.78; transition:opacity .2s; padding:6px 0; border-bottom:1px solid transparent;}
+  .nav-links a:hover{opacity:1; border-color:var(--gold);}
+  .nav-actions{display:flex; align-items:center; gap:14px;}
+  .theme-toggle{
+    width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
+    background:transparent; color:var(--paper); cursor:pointer; display:flex; align-items:center; justify-content:center;
+    font-size:1rem; transition:border-color .2s, transform .3s;
+  }
+  .theme-toggle:hover{border-color:var(--gold); transform:rotate(20deg);}
+  .btn{
+    font-family:var(--ff-body); font-weight:600; font-size:0.88rem; cursor:pointer;
+    padding:10px 20px; border-radius:999px; border:1px solid transparent;
+    transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-ghost{background:transparent; border-color:var(--line); color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--gold);}
+  .btn-gold{background:var(--gold); color:var(--navy-950);}
+  .btn-gold:hover{box-shadow:0 8px 24px rgba(232,163,61,0.35);}
+  .hide-mobile{display:inline-flex;}
+  @media(max-width:860px){ .nav-links{display:none;} }
+
+  /* ---------- HERO / COMPASS ---------- */
+  .hero{position:relative; padding:90px 0 60px;}
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--ff-mono); font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--gold); display:inline-block;}
+  h1.headline{
+    font-family:var(--ff-display); font-weight:600; font-size:clamp(2.4rem, 5vw, 3.9rem);
+    line-height:1.04; letter-spacing:-0.01em;
+  }
+  h1.headline em{font-style:italic; color:var(--gold-soft); font-weight:500;}
+  .hero-sub{margin-top:22px; font-size:1.08rem; color:var(--paper-dim); max-width:480px;}
+  .hero-cta{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .hero-stats{display:flex; gap:34px; margin-top:46px; flex-wrap:wrap;}
+  .hstat b{font-family:var(--ff-display); font-size:1.6rem; display:block; color:var(--paper);}
+  .hstat span{font-size:0.8rem; color:var(--paper-dim);}
+
+  .compass-wrap{position:relative; display:flex; align-items:center; justify-content:center; min-height:460px;}
+  .compass-wrap svg{width:100%; max-width:480px; height:auto; overflow:visible;}
+  .compass-ring{fill:none; stroke:var(--line); stroke-width:1;}
+  .compass-center-bg{fill:var(--navy-800); stroke:var(--gold); stroke-width:1.5;}
+  .compass-center-text{font-family:var(--ff-display); font-size:13px; fill:var(--paper); text-anchor:middle;}
+  .compass-node{cursor:pointer;}
+  .compass-node circle{fill:var(--navy-800); stroke:var(--line); stroke-width:1.2; transition:stroke .2s, fill .2s;}
+  .compass-node:hover circle, .compass-node.active circle{stroke:var(--gold); fill:var(--navy-700);}
+  .compass-node text{font-family:var(--ff-body); font-size:10.5px; fill:var(--paper-dim); text-anchor:middle; pointer-events:none; transition:fill .2s;}
+  .compass-node:hover text, .compass-node.active text{fill:var(--gold-soft);}
+  .compass-spoke{stroke:var(--line); stroke-width:1; transition:stroke .2s;}
+  .compass-node:hover ~ .compass-spoke{stroke:var(--gold);}
+  .orbit-dash{stroke-dasharray:2 6; animation:rotate 90s linear infinite;}
+  @keyframes rotate{ to{ transform:rotate(360deg);} }
+  .compass-orbit-group{transform-origin:240px 240px;}
+
+  .hero-card{
+    position:absolute; bottom:-6px; left:50%; transform:translateX(-50%);
+    background:var(--navy-800); border:1px solid var(--line); border-radius:14px;
+    padding:12px 18px; font-size:0.82rem; box-shadow:var(--shadow); display:flex; align-items:center; gap:10px;
+    font-family:var(--ff-mono); white-space:nowrap;
+  }
+  .pulse-dot{width:7px; height:7px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 0 rgba(63,184,175,.6); animation:pulse 2s infinite;}
+  @keyframes pulse{ 70%{box-shadow:0 0 0 8px rgba(63,184,175,0);} 100%{box-shadow:0 0 0 0 rgba(63,184,175,0);} }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:96px 0;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-tag{font-family:var(--ff-mono); font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--teal);}
+  h2.section-title{font-family:var(--ff-display); font-size:clamp(1.8rem,3.4vw,2.6rem); font-weight:600; margin-top:10px; letter-spacing:-0.01em;}
+  .section-desc{color:var(--paper-dim); margin-top:14px; font-size:1rem;}
+  hr.divider{border:none; border-top:1px solid var(--line); margin:0;}
+
+  /* ---------- SUBJECTS ---------- */
+  .subject-toolbar{display:flex; gap:12px; margin-bottom:28px; flex-wrap:wrap; align-items:center;}
+  .search-input{
+    flex:1; min-width:220px; background:var(--navy-800); border:1px solid var(--line); border-radius:12px;
+    padding:13px 16px; color:var(--paper); font-family:var(--ff-body); font-size:0.94rem;
+  }
+  .search-input::placeholder{color:var(--paper-dim);}
+  .level-select{background:var(--navy-800); border:1px solid var(--line); border-radius:12px; padding:13px 14px; color:var(--paper); font-family:var(--ff-body); font-size:0.9rem;}
+  .subject-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:16px;}
+  .subject-card{
+    background:var(--navy-800); border:1px solid var(--line); border-radius:var(--radius); padding:22px;
+    cursor:pointer; transition:transform .18s ease, border-color .18s ease; position:relative; overflow:hidden;
+  }
+  .subject-card:hover{transform:translateY(-4px); border-color:var(--gold);}
+  .subject-icon{font-size:1.6rem; margin-bottom:14px; display:block;}
+  .subject-card h3{font-family:var(--ff-display); font-size:1.08rem; font-weight:600; margin-bottom:6px;}
+  .subject-card p{font-size:0.82rem; color:var(--paper-dim); margin-bottom:14px;}
+  .level-pills{display:flex; gap:5px; flex-wrap:wrap;}
+  .pill{font-family:var(--ff-mono); font-size:0.66rem; padding:3px 8px; border-radius:999px; background:var(--navy-700); color:var(--paper-dim); border:1px solid var(--line);}
+  .subject-card.hidden{display:none;}
+
+  /* ---------- AI TUTOR ---------- */
+  .tutor-shell{
+    display:grid; grid-template-columns:280px 1fr; gap:0; background:var(--navy-800);
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+  }
+  .tutor-side{background:var(--navy-900); border-right:1px solid var(--line); padding:26px; display:flex; flex-direction:column; gap:10px;}
+  .tutor-side h4{font-family:var(--ff-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--paper-dim); margin-bottom:6px;}
+  .prompt-chip{
+    text-align:left; background:transparent; border:1px solid var(--line); color:var(--paper);
+    padding:10px 12px; border-radius:10px; font-size:0.82rem; cursor:pointer; transition:border-color .2s, background .2s;
+    font-family:var(--ff-body);
+  }
+  .prompt-chip:hover{border-color:var(--teal); background:var(--navy-800);}
+  .tutor-main{display:flex; flex-direction:column; height:520px;}
+  .tutor-log{flex:1; overflow-y:auto; padding:26px; display:flex; flex-direction:column; gap:16px;}
+  .msg{max-width:80%; padding:13px 16px; border-radius:14px; font-size:0.92rem; line-height:1.5;}
+  .msg.bot{background:var(--navy-700); align-self:flex-start; border-bottom-left-radius:4px;}
+  .msg.user{background:var(--gold); color:var(--navy-950); align-self:flex-end; border-bottom-right-radius:4px; font-weight:500;}
+  .msg.bot .tag{font-family:var(--ff-mono); font-size:0.66rem; color:var(--teal); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:6px;}
+  .tutor-input{display:flex; gap:10px; padding:18px 22px; border-top:1px solid var(--line);}
+  .tutor-input input{flex:1; background:var(--navy-900); border:1px solid var(--line); border-radius:10px; padding:12px 14px; color:var(--paper); font-family:var(--ff-body);}
+  .typing{display:flex; gap:4px; padding:4px 0;}
+  .typing span{width:6px; height:6px; border-radius:50%; background:var(--paper-dim); animation:bounce 1.2s infinite;}
+  .typing span:nth-child(2){animation-delay:.2s;} .typing span:nth-child(3){animation-delay:.4s;}
+  @keyframes bounce{ 0%,60%,100%{transform:translateY(0); opacity:.5;} 30%{transform:translateY(-4px); opacity:1;} }
+
+  /* ---------- MATH LAB ---------- */
+  .lab-grid{display:grid; grid-template-columns:1fr 320px; gap:0; background:var(--navy-800); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);}
+  .lab-canvas-wrap{padding:24px; position:relative;}
+  canvas#plot{width:100%; height:380px; display:block; border-radius:12px; background:var(--navy-950);}
+  .lab-controls{background:var(--navy-900); border-left:1px solid var(--line); padding:26px; display:flex; flex-direction:column; gap:18px;}
+  .lab-controls label{font-family:var(--ff-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--paper-dim); display:block; margin-bottom:8px;}
+  .eq-input{width:100%; background:var(--navy-800); border:1px solid var(--line); color:var(--gold-soft); font-family:var(--ff-mono); font-size:1rem; padding:12px 14px; border-radius:10px;}
+  .func-chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+  .func-chip{font-family:var(--ff-mono); font-size:0.72rem; padding:6px 10px; border:1px solid var(--line); border-radius:8px; background:transparent; color:var(--paper-dim); cursor:pointer;}
+  .func-chip:hover{color:var(--gold); border-color:var(--gold);}
+  .readout{background:var(--navy-800); border:1px solid var(--line); border-radius:10px; padding:14px; font-family:var(--ff-mono); font-size:0.82rem; color:var(--paper-dim);}
+  .readout b{color:var(--teal);}
+
+  /* ---------- DASHBOARD ---------- */
+  .dash-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:20px;}
+  .dash-card{background:var(--navy-800); border:1px solid var(--line); border-radius:var(--radius); padding:22px;}
+  .dash-card .num{font-family:var(--ff-display); font-size:2rem; color:var(--gold-soft);}
+  .dash-card .lbl{font-size:0.8rem; color:var(--paper-dim); margin-top:4px;}
+  .dash-lower{display:grid; grid-template-columns:1.4fr 1fr; gap:16px;}
+  .progress-row{display:flex; align-items:center; gap:14px; margin-bottom:16px;}
+  .progress-row .name{width:130px; font-size:0.88rem; flex-shrink:0;}
+  .progress-track{flex:1; height:8px; background:var(--navy-700); border-radius:999px; overflow:hidden;}
+  .progress-fill{height:100%; border-radius:999px; background:linear-gradient(90deg, var(--teal), var(--gold));}
+  .progress-row .pct{font-family:var(--ff-mono); font-size:0.78rem; color:var(--paper-dim); width:36px; text-align:right;}
+  .badge-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;}
+  .badge{width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; background:var(--navy-700); border:1px solid var(--line);}
+  .badge.earned{background:radial-gradient(circle, var(--gold-soft), var(--gold)); border-color:var(--gold);}
+  @media(max-width:900px){ .dash-grid{grid-template-columns:repeat(2,1fr);} .dash-lower{grid-template-columns:1fr;} }
+
+  /* ---------- TIMETABLE ---------- */
+  .tt-shell{background:var(--navy-800); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);}
+  .tt-form{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; padding:26px; border-bottom:1px solid var(--line); background:var(--navy-900);}
+  .tt-form .field label{font-family:var(--ff-mono); font-size:0.68rem; text-transform:uppercase; color:var(--paper-dim); display:block; margin-bottom:6px;}
+  .tt-form input, .tt-form select{width:100%; background:var(--navy-800); border:1px solid var(--line); border-radius:8px; padding:9px 11px; color:var(--paper); font-family:var(--ff-body); font-size:0.85rem;}
+  .tt-form .field.full{grid-column:1/-1;}
+  .tt-grid{padding:24px; overflow-x:auto;}
+  table.tt-table{width:100%; border-collapse:collapse; min-width:700px;}
+  table.tt-table th{font-family:var(--ff-mono); font-size:0.68rem; text-transform:uppercase; color:var(--paper-dim); text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);}
+  table.tt-table td{padding:8px 10px; font-size:0.8rem; border-bottom:1px solid var(--line); vertical-align:top;}
+  .slot{border-radius:8px; padding:6px 8px; margin-bottom:4px; font-size:0.76rem;}
+  .slot.study{background:rgba(63,184,175,0.14); color:var(--teal); border:1px solid rgba(63,184,175,0.3);}
+  .slot.revise{background:rgba(232,163,61,0.14); color:var(--gold-soft); border:1px solid rgba(232,163,61,0.3);}
+  .slot.break{background:var(--navy-700); color:var(--paper-dim);}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .testi-card{background:var(--navy-800); border:1px solid var(--line); border-radius:var(--radius); padding:26px;}
+  .testi-card p{font-size:0.94rem; color:var(--paper);}
+  .testi-who{margin-top:16px; display:flex; align-items:center; gap:10px;}
+  .testi-avatar{width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,var(--teal),var(--gold)); flex-shrink:0;}
+  .testi-who b{display:block; font-size:0.86rem;} .testi-who span{font-size:0.76rem; color:var(--paper-dim);}
+  @media(max-width:900px){ .testi-grid{grid-template-columns:1fr;} .dash-grid{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line); padding:56px 0 32px; margin-top:40px;}
+  .foot-grid{display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:30px; margin-bottom:40px;}
+  .foot-col h5{font-family:var(--ff-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--paper-dim); margin-bottom:14px;}
+  .foot-col a{display:block; font-size:0.86rem; margin-bottom:10px; opacity:0.82;}
+  .foot-col a:hover{opacity:1; color:var(--gold-soft);}
+  .foot-bottom{display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:var(--paper-dim); flex-wrap:wrap; gap:10px;}
+
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .tutor-shell{grid-template-columns:1fr;}
+    .tutor-side{border-right:none; border-bottom:1px solid var(--line); flex-direction:row; overflow-x:auto;}
+    .lab-grid{grid-template-columns:1fr;}
+    .lab-controls{border-left:none; border-top:1px solid var(--line);}
+    .dash-grid{grid-template-columns:repeat(2,1fr);}
+    .tt-form{grid-template-columns:1fr 1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 30 30"><circle cx="15" cy="15" r="13" fill="none" stroke="var(--gold)" stroke-width="1.4"/><circle cx="15" cy="15" r="2.6" fill="var(--gold)"/><path d="M15 2 L15 8 M15 22 L15 28 M2 15 L8 15 M22 15 L28 15" stroke="var(--gold)" stroke-width="1.2"/></svg>
+      Meridian
+    </div>
+    <ul class="nav-links">
+      <li><a href="#subjects">Subjects</a></li>
+      <li><a href="#tutor">AI Tutor</a></li>
+      <li><a href="#mathlab">Math Lab</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#timetable">Timetable</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark and light mode">◐</button>
+      <a class="btn btn-ghost hide-mobile" href="#" onclick="return false;">Log in</a>
+      <a class="btn btn-gold" href="#" onclick="return false;">Start free</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Your personal course, plotted</div>
+      <h1 class="headline">Learn smarter,<br><em>not</em> harder.</h1>
+      <p class="hero-sub">Meridian turns any subject into a clear bearing: step-by-step lessons, visual explanations, and an AI tutor that adjusts course the moment you get stuck.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="#subjects" style="padding:14px 26px;">Chart your first subject</a>
+        <a class="btn btn-ghost" href="#tutor" style="padding:14px 26px;">Ask the tutor →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><b>34</b><span>subjects, 5 levels each</span></div>
+        <div class="hstat"><b>12,400+</b><span>lessons &amp; visualizations</span></div>
+        <div class="hstat"><b>24/7</b><span>AI learning assistant</span></div>
+      </div>
+    </div>
+    <div class="compass-wrap">
+      <svg viewBox="0 0 480 480" id="compassSvg">
+        <circle class="compass-ring" cx="240" cy="240" r="200"/>
+        <circle class="compass-ring orbit-dash" cx="240" cy="240" r="160"/>
+        <circle class="compass-ring" cx="240" cy="240" r="88"/>
+        <g id="spokes"></g>
+        <g id="nodes"></g>
+        <g>
+          <circle class="compass-center-bg" cx="240" cy="240" r="54"/>
+          <text class="compass-center-text" x="240" y="236">You</text>
+          <text x="240" y="252" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="var(--paper-dim)">Level: Intermediate</text>
+        </g>
+      </svg>
+      <div class="hero-card"><span class="pulse-dot"></span> Now studying — Calculus, Limits &amp; Continuity</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="subjects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">01 · Subjects</div>
+      <h2 class="section-title">Pick a subject, then pick your depth.</h2>
+      <p class="section-desc">Every subject unlocks five levels — Beginner through Expert — so the same topic can meet you as a first-timer or take you into exam-grade territory.</p>
+    </div>
+    <div class="subject-toolbar">
+      <input class="search-input" id="subjectSearch" placeholder="Search subjects — try “chemistry” or “data”…" aria-label="Search subjects">
+      <select class="level-select" id="levelFilter" aria-label="Filter by level">
+        <option value="">All levels</option>
+        <option>Beginner</option><option>Easy</option><option>Intermediate</option><option>Advanced</option><option>Expert</option>
+      </select>
+    </div>
+    <div class="subject-grid" id="subjectGrid"></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="tutor">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">02 · AI Tutor</div>
+      <h2 class="section-title">Stuck on a step? Ask.</h2>
+      <p class="section-desc">A demo of the AI learning assistant — explains concepts, walks through problems, and suggests what to revise next.</p>
+    </div>
+    <div class="tutor-shell">
+      <div class="tutor-side">
+        <h4>Try asking</h4>
+        <button class="prompt-chip" data-q="Explain photosynthesis simply">Explain photosynthesis simply</button>
+        <button class="prompt-chip" data-q="Walk me through solving 2x + 5 = 17">Solve 2x + 5 = 17, step by step</button>
+        <button class="prompt-chip" data-q="What should I revise before my physics test?">What should I revise before my test?</button>
+        <button class="prompt-chip" data-q="Quiz me on the French Revolution">Quiz me on the French Revolution</button>
+      </div>
+      <div class="tutor-main">
+        <div class="tutor-log" id="tutorLog">
+          <div class="msg bot"><span class="tag">Tutor</span>Hi — I'm your Meridian tutor. Pick a prompt on the left, or type your own question below.</div>
+        </div>
+        <div class="tutor-input">
+          <input id="tutorInput" placeholder="Ask about any subject…" aria-label="Message the AI tutor">
+          <button class="btn btn-gold" id="tutorSend">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="mathlab">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">03 · Math Lab</div>
+      <h2 class="section-title">Graphs you can actually play with.</h2>
+      <p class="section-desc">Type a function and watch it plot live — a small taste of the interactive graphing, geometry, and calculus visualizations across the platform.</p>
+    </div>
+    <div class="lab-grid">
+      <div class="lab-canvas-wrap"><canvas id="plot"></canvas></div>
+      <div class="lab-controls">
+        <div>
+          <label for="eqInput">f(x) =</label>
+          <input class="eq-input" id="eqInput" value="sin(x) * x/4">
+        </div>
+        <div class="func-chips">
+          <button class="func-chip" data-fn="x^2">x²</button>
+          <button class="func-chip" data-fn="sin(x)">sin(x)</button>
+          <button class="func-chip" data-fn="cos(x)*2">cos(x)·2</button>
+          <button class="func-chip" data-fn="sqrt(abs(x))">√|x|</button>
+          <button class="func-chip" data-fn="1/x">1/x</button>
+          <button class="func-chip" data-fn="x^3/6">x³/6</button>
+        </div>
+        <div class="readout" id="plotReadout">Move your mouse over the graph to read coordinates.<br><b>x</b>: — &nbsp; <b>f(x)</b>: —</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="dashboard">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">04 · Dashboard</div>
+      <h2 class="section-title">Everything you're working toward, at a glance.</h2>
+      <p class="section-desc">Sample data for a returning student — streaks, XP, subject progress, and badges.</p>
+    </div>
+    <div class="dash-grid">
+      <div class="dash-card"><div class="num">18</div><div class="lbl">Day learning streak</div></div>
+      <div class="dash-card"><div class="num">6.5</div><div class="lbl">Study hours this week</div></div>
+      <div class="dash-card"><div class="num">2,340</div><div class="lbl">XP — Level 12</div></div>
+      <div class="dash-card"><div class="num">3</div><div class="lbl">Tests this week</div></div>
+    </div>
+    <div class="dash-lower">
+      <div class="dash-card">
+        <div class="section-tag" style="margin-bottom:16px;">Subject progress</div>
+        <div class="progress-row"><span class="name">Mathematics</span><div class="progress-track"><div class="progress-fill" style="width:78%"></div></div><span class="pct">78%</span></div>
+        <div class="progress-row"><span class="name">Chemistry</span><div class="progress-track"><div class="progress-fill" style="width:44%"></div></div><span class="pct">44%</span></div>
+        <div class="progress-row"><span class="name">Python</span><div class="progress-track"><div class="progress-fill" style="width:91%"></div></div><span class="pct">91%</span></div>
+        <div class="progress-row"><span class="name">History</span><div class="progress-track"><div class="progress-fill" style="width:22%"></div></div><span class="pct">22%</span></div>
+      </div>
+      <div class="dash-card">
+        <div class="section-tag" style="margin-bottom:16px;">Badges &amp; achievements</div>
+        <div class="badge-row">
+          <div class="badge earned" title="7-day streak">🔥</div>
+          <div class="badge earned" title="First mock test">🎯</div>
+          <div class="badge earned" title="Code challenge x10">💻</div>
+          <div class="badge" title="Locked — 30-day streak">🔒</div>
+          <div class="badge" title="Locked — Expert level">🔒</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="timetable">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">05 · Timetable</div>
+      <h2 class="section-title">Tell it your week. It plots the schedule.</h2>
+      <p class="section-desc">Enter your subjects and available hours — Meridian lays out a study week around them, including revision slots and breaks.</p>
+    </div>
+    <div class="tt-shell">
+      <div class="tt-form">
+        <div class="field"><label>Subjects (comma separated)</label><input id="ttSubjects" value="Math, Physics, Coding"></div>
+        <div class="field"><label>Study hours / day</label><input id="ttHours" type="number" value="3" min="1" max="8"></div>
+        <div class="field"><label>Weakest subject</label><input id="ttWeak" value="Physics"></div>
+        <div class="field"><label>Exam date</label><input id="ttExam" type="date"></div>
+        <div class="field full"><button class="btn btn-gold" id="ttGenerate" style="margin-top:4px;">Generate my weekly timetable</button></div>
+      </div>
+      <div class="tt-grid">
+        <table class="tt-table" id="ttTable"></table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Students on Meridian</div>
+      <h2 class="section-title">What it feels like to use.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <p>"I finally get calculus because I can see it, not just read it. The graph plotter alone was worth switching for."</p>
+        <div class="testi-who"><div class="testi-avatar"></div><div><b>Ananya R.</b><span>Grade 12, Hyderabad</span></div></div>
+      </div>
+      <div class="testi-card">
+        <p>"The AI tutor doesn't just give answers — it asks me questions back until I actually understand the step."</p>
+        <div class="testi-who"><div class="testi-avatar"></div><div><b>Marcus T.</b><span>CS undergrad</span></div></div>
+      </div>
+      <div class="testi-card">
+        <p>"Built my whole exam-week timetable in two minutes. The revision slots kept me from cramming for once."</p>
+        <div class="testi-who"><div class="testi-avatar"></div><div><b>Priya K.</b><span>Competitive exam prep</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="brand" style="margin-bottom:10px;">Meridian</div>
+        <p style="color:var(--paper-dim); font-size:0.86rem; max-width:280px;">A calmer way to learn — plotted lessons, visual explanations, and a tutor that meets you where you are.</p>
+      </div>
+      <div class="foot-col"><h5>Platform</h5>
+        <a href="#subjects">Subjects</a><a href="#tutor">AI Tutor</a><a href="#mathlab">Math Lab</a><a href="#dashboard">Dashboard</a>
+      </div>
+      <div class="foot-col"><h5>Support</h5>
+        <a href="#" onclick="return false;">FAQ</a><a href="#" onclick="return false;">Contact</a><a href="#" onclick="return false;">Privacy policy</a>
+      </div>
+      <div class="foot-col"><h5>Connect</h5>
+        <a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">YouTube</a><a href="#" onclick="return false;">Discord</a>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="foot-bottom" style="margin-top:24px;">
+      <span>© 2026 Meridian Learning. All rights reserved.</span>
+      <span>Made for students who'd rather understand than memorize.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- THEME TOGGLE ---------- */
+const root = document.documentElement;
+const themeBtn = document.getElementById('themeToggle');
+themeBtn.addEventListener('click', () => {
+  const isLight = root.getAttribute('data-theme') === 'light';
+  root.setAttribute('data-theme', isLight ? 'dark' : 'light');
+  themeBtn.textContent = isLight ? '◐' : '◑';
+});
+
+/* ---------- COMPASS HERO ---------- */
+const subjects = [
+  {name:'Mathematics', icon:'∑', desc:'Algebra to calculus, visually.', levels:['Beginner','Intermediate','Advanced']},
+  {name:'Physics', icon:'⚛', desc:'Simulations for every law.', levels:['Beginner','Easy','Advanced']},
+  {name:'Chemistry', icon:'⚗', desc:'Reactions, animated.', levels:['Easy','Intermediate','Expert']},
+  {name:'Biology', icon:'🧬', desc:'The human body, explored.', levels:['Beginner','Intermediate']},
+  {name:'Coding', icon:'</>', desc:'13 languages, live editor.', levels:['Beginner','Advanced','Expert']},
+  {name:'AI & ML', icon:'✦', desc:'From perceptrons to LLMs.', levels:['Intermediate','Advanced','Expert']},
+  {name:'Data Science', icon:'▦', desc:'Stats, charts, real data.', levels:['Intermediate','Advanced']},
+  {name:'History', icon:'⏳', desc:'Timelines that connect.', levels:['Beginner','Easy','Intermediate']},
+  {name:'Geography', icon:'🌍', desc:'Maps &amp; earth systems.', levels:['Beginner','Easy']},
+  {name:'Economics', icon:'⇄', desc:'Markets, modeled simply.', levels:['Intermediate','Advanced']},
+  {name:'English & Lit', icon:'✎', desc:'Reading, writing, analysis.', levels:['Beginner','Intermediate','Advanced']},
+  {name:'Exam Prep', icon:'☑', desc:'Mocks &amp; past papers.', levels:['Advanced','Expert']},
+];
+
+const svgNS = 'http://www.w3.org/2000/svg';
+const nodesG = document.getElementById('nodes');
+const spokesG = document.getElementById('spokes');
+const cx = 240, cy = 240, r = 200;
+subjects.forEach((s, i) => {
+  const angle = (i / subjects.length) * Math.PI * 2 - Math.PI/2;
+  const nx = cx + r * Math.cos(angle);
+  const ny = cy + r * Math.sin(angle);
+
+  const spoke = document.createElementNS(svgNS,'line');
+  spoke.setAttribute('class','compass-spoke');
+  spoke.setAttribute('x1', cx); spoke.setAttribute('y1', cy);
+  spoke.setAttribute('x2', nx); spoke.setAttribute('y2', ny);
+  spokesG.appendChild(spoke);
+
+  const g = document.createElementNS(svgNS,'g');
+  g.setAttribute('class','compass-node');
+  g.setAttribute('tabindex','0');
+  g.setAttribute('role','button');
+  g.setAttribute('aria-label', s.name);
+  const c = document.createElementNS(svgNS,'circle');
+  c.setAttribute('cx', nx); c.setAttribute('cy', ny); c.setAttribute('r', 30);
+  const icon = document.createElementNS(svgNS,'text');
+  icon.setAttribute('x', nx); icon.setAttribute('y', ny+1); icon.setAttribute('font-size','14'); icon.setAttribute('text-anchor','middle');
+  icon.setAttribute('fill','var(--gold-soft)');
+  icon.textContent = s.icon;
+  const label = document.createElementNS(svgNS,'text');
+  label.setAttribute('x', nx); label.setAttribute('y', ny+22);
+  label.textContent = s.name;
+  g.appendChild(c); g.appendChild(icon); g.appendChild(label);
+  g.addEventListener('click', () => {
+    document.querySelectorAll('.compass-node.active').forEach(n=>n.classList.remove('active'));
+    g.classList.add('active');
+    document.getElementById('subjects').scrollIntoView({behavior:'smooth'});
+    document.getElementById('subjectSearch').value = s.name;
+    filterSubjects();
+  });
+  nodesG.appendChild(g);
+});
+
+/* ---------- SUBJECT GRID ---------- */
+const grid = document.getElementById('subjectGrid');
+const allSubjects = subjects.concat([
+  {name:'Computer Science', icon:'⌘', desc:'Systems, algorithms, theory.', levels:['Intermediate','Advanced','Expert']},
+  {name:'Environmental Sci.', icon:'🌱', desc:'Ecosystems &amp; climate.', levels:['Beginner','Easy']},
+  {name:'Business', icon:'◧', desc:'Strategy &amp; operations.', levels:['Intermediate','Advanced']},
+  {name:'Finance', icon:'฿', desc:'Markets, budgeting, models.', levels:['Intermediate','Advanced','Expert']},
+  {name:'Logical Reasoning', icon:'⟡', desc:'Puzzles that sharpen thinking.', levels:['Beginner','Intermediate']},
+  {name:'Aptitude', icon:'✓', desc:'Quant &amp; verbal drills.', levels:['Easy','Intermediate']},
+  {name:'General Knowledge', icon:'✺', desc:'Wide, quiz-ready coverage.', levels:['Beginner','Easy']},
+  {name:'Languages', icon:'A文', desc:'Spanish, French, Mandarin &amp; more.', levels:['Beginner','Intermediate']},
+]);
+allSubjects.forEach(s => {
+  const card = document.createElement('div');
+  card.className = 'subject-card';
+  card.dataset.name = s.name.toLowerCase();
+  card.dataset.levels = s.levels.join(',');
+  card.innerHTML = `
+    <span class="subject-icon">${s.icon}</span>
+    <h3>${s.name}</h3>
+    <p>${s.desc}</p>
+    <div class="level-pills">${s.levels.map(l=>`<span class="pill">${l}</span>`).join('')}</div>
+  `;
+  grid.appendChild(card);
+});
+const searchInput = document.getElementById('subjectSearch');
+const levelFilter = document.getElementById('levelFilter');
+function filterSubjects(){
+  const q = searchInput.value.toLowerCase();
+  const lvl = levelFilter.value;
+  document.querySelectorAll('.subject-card').forEach(card => {
+    const matchesQ = card.dataset.name.includes(q);
+    const matchesLvl = !lvl || card.dataset.levels.includes(lvl);
+    card.classList.toggle('hidden', !(matchesQ && matchesLvl));
+  });
+}
+searchInput.addEventListener('input', filterSubjects);
+levelFilter.addEventListener('change', filterSubjects);
+
+/* ---------- AI TUTOR (scripted demo) ---------- */
+const tutorLog = document.getElementById('tutorLog');
+const tutorInput = document.getElementById('tutorInput');
+const responses = {
+  "explain photosynthesis simply": "Think of a leaf as a tiny solar-powered kitchen. It takes in sunlight, water from the roots, and carbon dioxide from the air. Using chlorophyll (the green pigment) to capture light energy, it converts these into glucose — the plant's food — and releases oxygen as a byproduct. That's the whole recipe: light + water + CO₂ → sugar + oxygen.",
+  "walk me through solving 2x + 5 = 17": "Step 1 — isolate the term with x: subtract 5 from both sides → 2x = 12.\nStep 2 — divide both sides by 2 → x = 6.\nStep 3 — check it: 2(6) + 5 = 17 ✓. So x = 6.",
+  "what should i revise before my physics test?": "Based on a typical weak-spot pattern, I'd prioritize: 1) Newton's second law (F=ma) problem-solving, 2) circular motion — a lot of students mix up centripetal vs centrifugal, 3) units and significant figures, since they cost easy marks. Want a 15-minute quiz on any of these?",
+  "quiz me on the french revolution": "Question 1 of 3 — What year did the storming of the Bastille take place?\nA) 1776  B) 1789  C) 1804  D) 1815\n(Type your answer and I'll walk through the next two.)",
+};
+function addMsg(text, cls, tag){
+  const div = document.createElement('div');
+  div.className = 'msg ' + cls;
+  div.innerHTML = (tag ? `<span class="tag">${tag}</span>` : '') + text.replace(/\n/g,'<br>');
+  tutorLog.appendChild(div);
+  tutorLog.scrollTop = tutorLog.scrollHeight;
+  return div;
+}
+function botReply(question){
+  const typing = document.createElement('div');
+  typing.className = 'msg bot';
+  typing.innerHTML = `<span class="tag">Tutor</span><div class="typing"><span></span><span></span><span></span></div>`;
+  tutorLog.appendChild(typing);
+  tutorLog.scrollTop = tutorLog.scrollHeight;
+  setTimeout(() => {
+    typing.remove();
+    const key = question.trim().toLowerCase();
+    const reply = responses[key] || "That's a great question — in the full version, I'd pull the relevant lesson, plot a diagram if it helps, and walk through it step by step. For this demo, try one of the suggested prompts on the left to see a full worked example.";
+    addMsg(reply, 'bot', 'Tutor');
+  }, 700 + Math.random()*500);
+}
+function sendMessage(text){
+  if(!text.trim()) return;
+  addMsg(text, 'user');
+  tutorInput.value = '';
+  botReply(text);
+}
+document.getElementById('tutorSend').addEventListener('click', () => sendMessage(tutorInput.value));
+tutorInput.addEventListener('keydown', e => { if(e.key==='Enter') sendMessage(tutorInput.value); });
+document.querySelectorAll('.prompt-chip').forEach(btn => {
+  btn.addEventListener('click', () => sendMessage(btn.dataset.q));
+});
+
+/* ---------- MATH LAB — live function plotter ---------- */
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+const eqInput = document.getElementById('eqInput');
+const readout = document.getElementById('plotReadout');
+let mouseX = null;
+
+function resizeCanvas(){
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * devicePixelRatio;
+  canvas.height = rect.height * devicePixelRatio;
+  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  drawPlot();
+}
+
+function safeEval(expr, x){
+  // Minimal, sandboxed math expression evaluator (supports + - * / ^ sin cos tan sqrt abs pi)
+  const scope = { x, sin:Math.sin, cos:Math.cos, tan:Math.tan, sqrt:Math.sqrt, abs:Math.abs, pi:Math.PI, e:Math.E, log:Math.log, exp:Math.exp };
+  const jsExpr = expr.replace(/\^/g,'**');
+  try{
+    const fn = new Function(...Object.keys(scope), `return (${jsExpr});`);
+    const val = fn(...Object.values(scope));
+    return Number.isFinite(val) ? val : null;
+  }catch(e){ return null; }
+}
+
+function drawPlot(){
+  const w = canvas.getBoundingClientRect().width;
+  const h = canvas.getBoundingClientRect().height;
+  ctx.clearRect(0,0,w,h);
+  const scaleX = 32, scaleY = 32;
+  const originX = w/2, originY = h/2;
+
+  // grid
+  ctx.strokeStyle = 'rgba(243,239,228,0.06)';
+  ctx.lineWidth = 1;
+  for(let gx = originX % scaleX; gx < w; gx += scaleX){ ctx.beginPath(); ctx.moveTo(gx,0); ctx.lineTo(gx,h); ctx.stroke(); }
+  for(let gy = originY % scaleY; gy < h; gy += scaleY){ ctx.beginPath(); ctx.moveTo(0,gy); ctx.lineTo(w,gy); ctx.stroke(); }
+
+  // axes
+  ctx.strokeStyle = 'rgba(243,239,228,0.28)';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.moveTo(0, originY); ctx.lineTo(w, originY); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(originX, 0); ctx.lineTo(originX, h); ctx.stroke();
+
+  // curve
+  const expr = eqInput.value || '0';
+  ctx.strokeStyle = getComputedStyle(root).getPropertyValue('--teal').trim() || '#3fb8af';
+  ctx.lineWidth = 2.4;
+  ctx.beginPath();
+  let started = false;
+  for(let px = 0; px <= w; px++){
+    const xVal = (px - originX) / scaleX;
+    const yVal = safeEval(expr, xVal);
+    if(yVal === null || Math.abs(yVal) > 1e4){ started = false; continue; }
+    const py = originY - yVal * scaleY;
+    if(!started){ ctx.moveTo(px, py); started = true; } else { ctx.lineTo(px, py); }
+  }
+  ctx.stroke();
+
+  // hover marker
+  if(mouseX !== null){
+    const xVal = (mouseX - originX) / scaleX;
+    const yVal = safeEval(expr, xVal);
+    if(yVal !== null){
+      const py = originY - yVal * scaleY;
+      ctx.fillStyle = getComputedStyle(root).getPropertyValue('--gold').trim() || '#e8a33d';
+      ctx.beginPath(); ctx.arc(mouseX, py, 4.5, 0, Math.PI*2); ctx.fill();
+      readout.innerHTML = `<b>x</b>: ${xVal.toFixed(2)} &nbsp; <b>f(x)</b>: ${yVal.toFixed(2)}`;
+    }
+  }
+}
+canvas.addEventListener('mousemove', e => {
+  mouseX = e.clientX - canvas.getBoundingClientRect().left;
+  drawPlot();
+});
+canvas.addEventListener('mouseleave', () => { mouseX = null; readout.innerHTML = 'Move your mouse over the graph to read coordinates.<br><b>x</b>: — &nbsp; <b>f(x)</b>: —'; drawPlot(); });
+eqInput.addEventListener('input', drawPlot);
+document.querySelectorAll('.func-chip').forEach(btn => {
+  btn.addEventListener('click', () => { eqInput.value = btn.dataset.fn; drawPlot(); });
+});
+window.addEventListener('resize', resizeCanvas);
+setTimeout(resizeCanvas, 50);
+themeBtn.addEventListener('click', () => setTimeout(drawPlot, 100));
+
+/* ---------- TIMETABLE GENERATOR ---------- */
+document.getElementById('ttGenerate').addEventListener('click', generateTimetable);
+function generateTimetable(){
+  const subjectsList = document.getElementById('ttSubjects').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const hours = parseInt(document.getElementById('ttHours').value) || 2;
+  const weak = document.getElementById('ttWeak').value.trim();
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const slots = [];
+  for(let h=0; h<hours; h++){ slots.push('study'); }
+  slots.push('revise');
+
+  let subjIdx = 0;
+  const table = document.getElementById('ttTable');
+  let html = '<tr><th>Time</th>' + days.map(d=>`<th>${d}</th>`).join('') + '</tr>';
+  const startHour = 17; // 5 PM default study start
+  for(let row=0; row<hours+1; row++){
+    const timeLabel = `${((startHour+row-1)%12)||12}:00 ${startHour+row-1<12||startHour+row-1>=24?'AM':'PM'}`;
+    html += `<tr><td style="font-family:var(--ff-mono); color:var(--paper-dim);">${timeLabel}</td>`;
+    days.forEach((d, di) => {
+      if(row === hours){
+        html += `<td><div class="slot break">15 min break</div></td>`;
+        return;
+      }
+      let subj;
+      if(row === hours-1){
+        subj = weak || subjectsList[0] || 'Revision';
+        html += `<td><div class="slot revise">Revise · ${subj}</div></td>`;
+      } else {
+        subj = subjectsList[(di+row) % (subjectsList.length||1)] || 'Study block';
+        html += `<td><div class="slot study">${subj}</div></td>`;
+      }
+    });
+    html += '</tr>';
+  }
+  table.innerHTML = html;
+}
+generateTimetable();
+</script>
+</body>
+</html>
