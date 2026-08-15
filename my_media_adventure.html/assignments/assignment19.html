@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Digital Zoo Manager</title>
+
+  <style>
+    body {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      background-color: rgb(219, 249, 239);
+      text-align: center;
+      color: #222222;
+    }
+
+    h1 {
+      color: rgb(235, 122, 56);
+    }
+
+    #zoo {
+      width: 420px;
+      border: 3px solid rgb(109, 126, 235);
+      border-radius: 12px;
+      background-color: white;
+      margin: 20px auto;
+      padding: 15px;
+    }
+
+    .zone {
+      border: 2px solid rgb(234, 187, 217);
+      border-radius: 8px;
+      margin: 10px;
+      padding: 12px;
+      background-color: #f0fff0;
+      text-align: left;
+    }
+
+    .animal {
+      font-weight: bold;
+      color: rgb(69, 27, 196);
+    }
+
+    button {
+      background-color: rgb(130, 215, 240);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 22px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #output {
+      width: 420px;
+      border: 2px dashed rgb(229, 123, 206);
+      border-radius: 10px;
+      background-color: #ffffff;
+      margin: 20px auto;
+      padding: 12px;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>My Digital Zoo Manager</h1>
+
+  <div id="zoo">
+
+    <div class="zone" id="lionZone">
+      <h2>Lion Den</h2>
+      <p>Animal: <span class="animal">Lion</span></p>
+    </div>
+
+    <div class="zone" id="monkeyZone">
+      <h2>Monkey Zone</h2>
+      <p>Animal: <span class="animal">Monkey</span></p>
+    </div>
+
+    <div class="zone" id="birdZone">
+      <h2>Bird Zone</h2>
+      <p>Animal: <span class="animal">Parrots</span></p>
+    </div>
+
+  </div>
+
+  <button onclick="manageZoo()">Manage Zoo</button>
+
+  <div id="output">
+    Zoo information will appear here.
+  </div>
+
+  <script>
+    function manageZoo(){
+
+     
+       document.getElementById("zoo");
+       document.getElementById("lionZone");
+       document.getElementById("monkeyZone");
+       document.getElementById("birdZone");
+       document.getElementById("output");
+    
+      
+      let parentNodeName = lionZone.parentNode.id;
+
+     
+      let firstChildZone = zoo.children[0].id;
+      let secondChildZone = zoo.children[1].id;
+      let nextSiblingZone = lionZone.nextElementSibling.id;
+      let previousSiblingZone = birdZone.previousElementSibling.id;
+
+    
+      let elementNodeType = lionZone.nodeType;
+      let textNodeType = lionZone.firstChild.nodeType;
+
+      lionZone.style.backgroundColor = "#fff3cd";
+      monkeyZone.style.backgroundColor = "#d1ecf1";
+      birdZone.style.backgroundColor = "#f8d7da";
+
+      lionZone.querySelector("h2").innerHTML = "Updated Lion den";
+      monkeyZone.querySelector("h2").innerHTML = "Updated Monkey Zone";
+      birdZone.querySelector("h2").innerHTML = "Updated Bird Zone";
+      
+    }
+  </script>
+</body>
+</html>
