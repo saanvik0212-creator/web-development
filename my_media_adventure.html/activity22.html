@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       span{
+        color: blueviolet;
+       }
+       div{
+        border: solid blue;
+        width: 200px;height: 30px;
+       }
+    </style>
+</head>
+<body>
+    <h1>My profile</h1>
+    <button onclick="showProfile()">Show profile</button>
+    <div>Name<span id="name"></span></div>
+    <div>Rank<span id="rank"></span></div>
+    <div>Team<span id="team"></span></div>
+    <div>My score<span id="myscore"></span></div>
+    <div>Top score<span id="topscore"></span></div>
+    <div>Greeting<span id="greeting"></span></div>
+    <div>Stars<span id="stars"></span></div>
+    <script>
+        function showProfile(){
+        let fullname="saanvi"
+        let team =null
+        let score=75
+        let topscore=100
+        let istopscore= score==topscore
+        let rank
+        if (score>80){
+            rank="good"
+        }else if(score>50){
+            rank="average"
+        }else{
+            rank="low percentage"
+        }
+        let hour=new Date().getHours()
+        let greeting
+        if (hour<12){
+            greeting="good morning!"
+        }else if (hour<17){
+            greeting="Good afternoon"
+        }else {
+            greeting="Good evening!"
+        }
+        let stars=""
+        let count=0
+        while(count<5){
+            stars=stars +"*";
+            count= count + 1;
+        }
+
+        document.getElementById("name").innerHTML=fullname;
+        document.getElementById("rank").innerHTML=rank;
+        document.getElementById("myscore").innerHTML=score;
+        document.getElementById("topscore").innerHTML=istopscore;
+        document.getElementById("greeting").innerHTML=greeting;
+        document.getElementById("stars").innerHTML=stars;
+        document.getElementById("team").innerHTML=team;
+
+        }
+        
+    </script>
+    
+</body>
+</html>

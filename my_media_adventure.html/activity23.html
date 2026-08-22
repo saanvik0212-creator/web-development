@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Java script</h1>
+    <button onclick="showPlanet()">Show Planets!</button>
+    <div class="cards">
+        <div id="card1"></div>
+        <div id="card2"></div>
+        <div id="card3"></div>
+    </div>
+    <script>
+        class Planet {
+            constructor(name, fact,){
+                this.name = name;
+                this.fact = fact;
+            }
+            describe() {
+                return this.name + ":" + this.fact;
+            }
+
+        }
+        function showPlanet() {
+            let p1 = new Planet("Earth", "The earth is spherical");
+            let p2 = new Planet("Mercury", "Mercury is the first planet");
+            let p3 = new Planet("Pluto", "It is a dwarf planet");
+
+            document.getElementById("card1").innerHTML =p1.name + "description" + p1.describe();
+            document.getElementById("card2").innerHTML =p2.name + "description" + p2.describe();
+            document.getElementById("card3").innerHTML =p3.name + "description" + p3.describe();     
+         }
+    </script>
+    
+</body>
+</html>
