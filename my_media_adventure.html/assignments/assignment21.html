@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Superhero Power Cards</title>
+
+  <style>
+    body {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      background-color: #cfd9f4;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #e11590;
+    }
+
+    p {
+      color: #444444;
+    }
+
+    button {
+      background-color: #d986f0;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background-color: white;
+      border: 3px solid #fb033dab;
+      border-radius: 12px;
+      width: 220px;
+      padding: 18px;
+    }
+
+    .hero-name {
+      font-size: 22px;
+      font-weight: bold;
+      color: #222222;
+    }
+
+    .hero-power {
+      color: #66a8f3;
+      font-weight: bold;
+    }
+
+    .hero-mission {
+      color: #666666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>My Superhero Power Cards</h1>
+
+  <p>
+    Click the button to create superhero objects using JavaScript classes.
+  </p>
+
+  <button onclick="showHeroes()">Show Superheroes</button>
+
+  <div class="card-container" id="heroCards"></div>
+
+  <script>
+    
+    class Superhero {
+      constructor(name, power, mission) {
+        this.name = name;
+        this.power = power;
+        this.mission = mission;
+      }
+
+      describeHero() {
+        return "<div class='hero-card'>" +
+               "<p class='hero-name'>" + this.name + "</p>" +
+               "<p class='hero-power'>Power: " + this.power + "</p>" +
+               "<p class='hero-mission'>Mission: " + this.mission + "</p>" +
+               "</div>";
+      }
+    }
+
+    function showHeroes() {
+
+      let hero1 = new Superhero(
+        "Programe Hacker",
+        "Debugging errors",
+        "Fix broken programs and save the coding world."
+      );
+
+      let hero2 = new Superhero(
+        "Flashman",
+        "Super speed design",
+        "Builds amazing websites in the blink of an eye."
+      );
+
+      let hero3 = new Superhero(
+        "Logic Girl",
+        "Smart problem-solving",
+        "Quick and logical solving for challenging problems."
+      );
+
+      let hero4 = new Superhero(
+        "Data Analyst",
+        "Data protection",
+        "Keep important information safe."
+      );
+
+      document.getElementById("heroCards").innerHTML =
+        hero1.describeHero() +
+        hero2.describeHero() +
+        hero3.describeHero() +
+        hero4.describeHero();
+    }
+  </script>
+
+</body>
+</html>
