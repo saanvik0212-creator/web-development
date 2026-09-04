@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>School Event Data Viewer</title>
+ 
+  <style>
+    body {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      background-color: #f1d1e6;
+      color: #222222;
+      text-align: center;
+    }
+ 
+    .event-card {
+      width: 520px;
+      background-color: rgb(188, 247, 245);
+      border: 3px solid #f33bf6;
+      border-radius: 18px;
+      margin: 40px auto;
+      padding: 25px;
+      box-shadow: 0 0 18px #93c5fd;
+    }
+ 
+    h1 {
+      color: #234fc6;
+    }
+ 
+    button {
+      background-color: #25a2eb;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+ 
+    button:hover {
+      background-color: #1e40af;
+    }
+ 
+    .info-box {
+      background-color: #eff6ff;
+      border: 2px dashed #60a5fa;
+      border-radius: 12px;
+      margin-top: 18px;
+      padding: 15px;
+      text-align: left;
+      line-height: 1.7;
+    }
+ 
+    #status {
+      color: #33eb77;
+      font-weight: bold;
+      font-size: 18px;
+    }
+ 
+    #jsonOutput {
+      color: #7c1252;
+      font-size: 14px;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+ 
+<body>
+ 
+  <div class="event-card">
+ 
+    <h1>School Event Data Viewer</h1>
+ 
+    <p>
+      Click the button to check school event details by using Asynchronous JavaScript.
+    </p>
+ 
+    <button onclick="showSchoolEvent()">Load Event Details</button>
+ 
+    <div class="info-box">
+      <h2>Loading Status</h2>
+      <p id="status">Event data loads here...</p>
+    </div>
+ 
+    <div class="info-box">
+      <h2>Event Details</h2>
+      <p id="eventDetails"></p>
+    </div>
+ 
+    <div class="info-box">
+      <h2>JSON Text Output</h2>
+      <p id="jsonOutput"></p>
+    </div>
+ 
+  </div>
+ 
+  <script>
+    function showLoadingMessage(message) {
+      document.getElementById("status").innerHTML = message;
+    }
+    function fetchSchoolEventData(callback) {
+ 
+      callback("Loading school event data/details... Please wait.");
+ 
+      return new Promise(function(resolve) {
+ 
+        
+        setTimeout(function() {
+ 
+          let schoolEvent = {
+            eventName: "Model United Nations",
+            date: "19 September 2026",
+            time: "09:00 AM",
+            venue: "School Auditorium",
+            coordinator: "Ms.sukanya",
+            participants: 217,
+            isRegistrationOpen: true
+          };
+ 
+          resolve(schoolEvent);
+ 
+        }, 2000);
+      });
+    }
+    async function showSchoolEvent() {
+ 
+      let eventData = await fetchSchoolEventData(showLoadingMessage);
+ 
+      document.getElementById("status").innerHTML = "Event data loaded successfully!";
+ 
+      let jsonText = JSON.stringify(eventData);
+ 
+      let parsedEvent = JSON.parse(jsonText);
+
+      let eventMessage = "";
+      eventMessage = eventMessage + "Event Name: " + parsedEvent.eventName + "<br>";
+      eventMessage = eventMessage + "Date: " + parsedEvent.date + "<br>";
+      eventMessage = eventMessage + "Time: " + parsedEvent.time + "<br>";
+      eventMessage = eventMessage + "Venue: " + parsedEvent.venue + "<br>";
+      eventMessage = eventMessage + "Coordinator: " + parsedEvent.coordinator + "<br>";
+      eventMessage = eventMessage + "Participants: " + parsedEvent.participants + "<br>";
+ 
+      if (parsedEvent.isRegistrationOpen === true) {
+        eventMessage = eventMessage + "Registration Status: Open";
+      } else {
+        eventMessage = eventMessage + "Registration Status: Closed";
+      }
+ 
+      document.getElementById("eventDetails").innerHTML = eventMessage;
+      document.getElementById("jsonOutput").innerHTML = jsonText;
+    }
+ 
+  </script>
+ 
+</body>
+</html>

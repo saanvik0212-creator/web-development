@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h1>Tracker</h1>
+    <button onclick="saveOrder()">Save Order</button>
+    <button onclick="delivery()">Start delivery</button>
+    <div>JSON Text: <span id="json-text"></span></div>
+    <div>Loaded Item: <span id="loaded-item"></span></div>
+    <div>Loaded Price: <span id="loaded-price"></span></div>
+    <div>status: <span id="status"></span></div>
+    <div>Result: <span id="result"></span></div>
+    <script>
+        let order = {
+            item: "pasta",
+            price: 3,
+            shop: "Mcdonalds"
+        }
+        function saveOrder(){
+            let jsonText =JSON.stringify(order);
+            let loadedorder = JSON.parse(jsonText); 
+            document.getElementById("json-text").innerHTML = jsonText;
+            document.getElementById("loaded-item").innerHTML = loadedorder.item;
+            document.getElementById("loaded-price").innerHTML = "$" + loadedorder.price;
+        }
+        function delay(ms) {
+            return new Promise(function(r){
+                setTimeout(r, ms);
+            })
+        }
+        async function delivery() {
+            document.getElementById("result").innerHTML = "";
+            document.getElementById("status").innerHTML = "Order recieved!";
+        setTimeout(function(){
+            document.getElementById("status").innerHTML = "kitchen is preparing your order";
+
+        }, 1000)
+        await delay(6000);
+        document.getElementById("status").innerHTML = "Out for delivery!";
+        await delay(2000);
+        document.getElementById("result").innerHTML = "Your order has been delivered";
+        }
+
+    </script>
+</body>
+</html>
