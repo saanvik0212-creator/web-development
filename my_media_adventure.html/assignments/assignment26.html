@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000606;
+    padding: 15px 30px;
+    color: white;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6347;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ff6347;
+}
+
+.banner-content h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.banner-content p {
+    font-size: 20px;
+    font-style: italic;
+}
+.banner {
+    
+    background-image: url('restaurent.png.png');
+    
+    background-size: cover;
+    
+    background-position: center;
+    
+    height: 400px; 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.banner-content {
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 30px;
+    border-radius: 10px;
+    color: white; 
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo">Susan's kitchen</div>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+    </nav>
+    <header class="banner">
+        <div class="banner-content">
+
+            <h1>Welcome to susan's Kitchen</h1>
+            <p>Fresh ingredients, delicious memories.</p>
+            
+        </div>
+    </header>
+    
+</body>
+</html>
