@@ -3,9 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Saanvi's Bank App</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #app-title{
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+        #balance-label{
+            text-decoration: underline;
+        }
+        #amount-label{
+            text-decoration: underline;
+        }
+        #app{
+            background-color: aliceblue;
+            width: 300px;
+            border-radius: 20px;
+            padding: 27px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+            margin: 40px auto;
+
+        }
+        .action{
+            padding: 20px;
+            border: 0px;
+            border-radius: 17px;
+            color: white;
+            cursor: pointer;
+            box-shadow: small;
+        }
+        #action-credit{
+            background-color: green;
+        }
+        #action-debit{
+            background-color: red;
+        }
+       
+        #note{
+            text-decoration: line-through;
+            font-size: 29px;
+            color: grey;
+
+        }
+    </style>
 </head>
 <body>
+    <div id="app">
     <div id="app-title">Saanvi's Bank</div>
     <div id="balance-box">
         <p id="balance-label">Available Balance</p>
@@ -21,8 +68,9 @@
     </div>
     <p id="note">Terms and Conditions Apply</p>
     <p id="message"></p>
-    <div id="balnce-box">
+    <div id="balance-box">
         <p id="balance-label">Available Balnce</p>
+    </div>
     </div>
     
 </body>
