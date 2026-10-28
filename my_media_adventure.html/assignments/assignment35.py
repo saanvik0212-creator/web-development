@@ -2,9 +2,6 @@ student_profile = ("Saanvi", "Grade 9", "Section A", 7)
  
 print("Student Profile:", student_profile)
  
- 
-# PART 2 — ACCESSING TUPLE ELEMENTS
- 
 student_name = student_profile[0]
 grade = student_profile[1]
 section = student_profile[2]
