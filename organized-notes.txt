@@ -1,0 +1,4 @@
+IMPORTANT: Study for the Python quiz on Friday.
+TODO: Finish the smart-notes coding project.
+IMPORTANT: Review file handling methods.
+TODO: Submit the assignment before Nov 19.
